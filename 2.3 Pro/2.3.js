@@ -1,10 +1,5 @@
-//let screensValue = "шаблонные, с уникальным дизайном, с анимациями"
 let screenPrice = 500;
-//let percentage = "25%"
 let fullPricename = "full price:"
-
-
-
 let titleProject = prompt("Название проекта?")
 let screensValue = prompt("тип экрана?")
 let responsive = prompt("нужен ли респонсивный сайт?")
@@ -17,9 +12,23 @@ let if5percentsale = "сделаем скидку в 5%"
 let if0percentsale = "скидка не предусмотренa"
 
 
+
 let fullPrice = +screenPrice + servicePrice1 + servicePrice2
 let percentmoney = fullPrice * 0.1;
 let servicemoney = +fullPrice - +percentmoney;
+
+
+
+console.log(titleProject)
+console.log(screensValue)
+console.log(responsive)
+console.log(service1)
+console.log(service2)
+console.log(fullPricename, fullPrice);
+console.log(servicemoney)
+
+
+
 if (fullPrice > 50000) {
     console.log(if10percentsale)
 }
@@ -32,13 +41,3 @@ if (fullPrice < 20000 && fullPrice > 0) {
 if (fullPrice === 20000 || fullPrice === 0 || fullPrice === 50000) {
     console.log("something went wrong")
 }
-
-
-
-console.log(titleProject)
-console.log(screensValue)
-console.log(responsive)
-console.log(service1)
-console.log(service2)
-console.log(fullPricename, fullPrice);
-console.log(servicemoney)
