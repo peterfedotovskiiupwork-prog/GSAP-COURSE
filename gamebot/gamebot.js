@@ -1,83 +1,67 @@
+'use strict'
+
 const gameBotFunction = function () {
+  function randomGenerate(min, max) {
+    let rand = min - 0.5 + Math.random() * (max - min + 1)
+    return Math.round(rand)
+  }
 
-    function checkIsNumber(value) {
-        return isFinite(parseFloat(value)) && value !== null && value.trim() !== '';
+  let mysteryNumber = randomGenerate(1, 100)
+  let answerNum = ''
+  let tries = 5
+
+  const isNumber = function (num) {
+    return !isNaN(parseFloat(num)) && isFinite(num)
+  }
+
+  return function getResult() {
+
+    answerNum = prompt('Угадайте число от 1 до 100')
+
+    if (answerNum === null) {
+      alert('Вы завершили игру')
+      return
     }
 
-
-    function randomGenerate(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+    while (!isNumber(answerNum) || answerNum.trim() === '') {
+      alert('Вы ввели строку:')
+      answerNum = prompt('Угадайте число от 1 до 100') // 10
     }
 
+    answerNum = Number(answerNum)
 
-    let mysteryNumber = randomGenerate(1, 100);
-    console.log(mysteryNumber);
+    if (mysteryNumber > answerNum) {
+  alert('Загаданное число больше: ' + 'Осталось попыток: ' + tries)
+} else if (mysteryNumber < answerNum) {
+  alert('Загаданное число меньше: ' + 'Осталось попыток: ' + tries)
+} else if (mysteryNumber === answerNum) {
+  const isUserWantNewGame = confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?')
 
-    let tries = 5;
+  if (isUserWantNewGame) {
+    tries = 10
+    mysteryNumber = randomGenerate(1, 100)
+  } else {
+    tries = 0
+  }
+}
 
+if (tries > 0) {
+  tries--
+  getResult();
+} else {
+  const maybeAgain = confirm('Попыток больше нет, игра окончена. Хотите начать заново?')
 
-    function getResult() {
-
-  
-        let input = prompt('Угадайте число от 1 до 100');
-
-        if (input === null) {
-            alert('Вы завершили игру');
-            return;
-        }
-
-        while (!checkIsNumber(input) && input !== null && input.trim() !== '') {
-            input = prompt('Введите корректное число от 1 до 100');
-        }
-
-        if (input === null) {
-            alert('Вы завершили игру');
-            return;
-        }
-
-        let answerNum = parseFloat(input);
-
-        
-        if (mysteryNumber > answerNum) {
-            alert('Загаданное число больше. Попыток осталось: ' + tries);
-
-        } else if (mysteryNumber < answerNum) {
-            alert('Загаданное число меньше. Попыток осталось: ' + tries);
-
-        } else if (mysteryNumber === answerNum) {
-            let playAgain = confirm('Вы угадали! Хотите сыграть снова?');
-
-            if (playAgain) {
-                tries = 5;
-                mysteryNumber = randomGenerate(1, 100);
-            } else {
-                tries = 0;
-            }
-        }
-
-     
-        if (tries > 0) {
-            tries--;
-            getResult();
-        } else {
-            let restart = confirm('Попытки закончились. Хотите попробовать снова?');
-
-            if (restart) {
-                tries = 5;
-                mysteryNumber = randomGenerate(1, 100);
-                getResult();
-            } else {
-                alert('Вы завершили игру');
-                return;
-            }
-        }
-    }
-
-   
-    alert('Добро пожаловать! Угадайте число от 1 до 100. У вас ' + tries + ' попыток.');
+  if (maybeAgain) {
+    tries = 5
     getResult();
-};
+  } else {
+    alert('Вы завершили игру')
+    return
+  }
+}
 
+  }
+}
 
-gameBotFunction();
-console.log(mysteryNumber);
+let gameBot = gameBotFunction()
+gameBot()
